@@ -122,3 +122,23 @@ func findNextAny(root *Node, node *Node) *Node {
 	}
 	return nil
 }
+
+/**
+ * @berif: Insert a new node into the BST. (Sorted BST)
+ * @param root: The root of binary tree.
+ * @param value: The value of the new node.
+ * @return: The root of the new binary tree.
+ */
+func insertSorted(root *Node, value int) *Node {
+	if root == nil {
+		return &Node{value: value}
+	}
+
+	if value < root.value {
+		root.left = insertSorted(root.left, value)
+	} else {
+		root.right = insertSorted(root.right, value)
+	}
+
+	return root
+}
