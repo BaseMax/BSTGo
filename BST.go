@@ -1,3 +1,11 @@
+/**
+ * @Project: Go: Binary Search Tree
+ * @Author: Max Base
+ * @Date: 2022-12-26
+ * @License: GPL-3.0
+ * @Repository: https://github.com/BaseMax/BSTGo
+ */
+
 package main
 
 type Node struct {
@@ -87,6 +95,33 @@ func find(root *Node, value int) *Node {
 	} else {
 		return find(root.right, value)
 	}
+}
+
+/**
+ * @brief: Find the node with the given value (non-recursively).
+ * @param root: The root of binary tree.
+ * @param value: The value of the node to be found.
+ * @return: The node with the given value.
+ */
+func findNonRecursively(root *Node, value int) *Node {
+	if root == nil {
+		return nil
+	}
+
+	n := root
+	for n != nil {
+		if n.value == value {
+			return n
+		}
+
+		if value < n.value {
+			n = n.left
+		} else {
+			n = n.right
+		}
+	}
+
+	return nil
 }
 
 /**
@@ -249,6 +284,12 @@ func main() {
 
 	// Find a node
 	n = find(bst.root, 5)
+	if n != nil {
+		println(n.value)
+	}
+
+	// findNonRecursively
+	n = findNonRecursively(bst.root, 5)
 	if n != nil {
 		println(n.value)
 	}
