@@ -31,6 +31,37 @@ func insert(root *Node, value int) *Node {
 }
 
 /**
+ * @brief: Insert a new node into the BST (non-recursively).
+ * @param root: The root of binary tree.
+ * @param value: The value of the new node.
+ * @return: The root of the new binary tree.
+ */
+func insertNonRecursively(root *Node, value int) *Node {
+	if root == nil {
+		return &Node{value: value}
+	}
+
+	n := root
+	for n != nil {
+		if value < n.value {
+			if n.left == nil {
+				n.left = &Node{value: value}
+				break
+			}
+			n = n.left
+		} else {
+			if n.right == nil {
+				n.right = &Node{value: value}
+				break
+			}
+			n = n.right
+		}
+	}
+
+	return root
+}
+
+/**
  * @brief: Find the node with the given value.
  * @param root: The root of binary tree.
  * @param value: The value of the node to be found.
