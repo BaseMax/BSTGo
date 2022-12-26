@@ -31,9 +31,11 @@ type BST struct {
 - `func findNextAny(root *Node, node *Node) *Node`: Find next of the given node (for any Binary Tree).
 - `func deleteNode(root *Node, value int) *Node`: Delete a node with the given value.
 - `func deleteNodeNonRecursively(root *Node, value int) *Node`: Delete a node with the given value (non-recursive).
-
 - `func getHeight(root *Node) int`: Get the height of the BST.
+- `func getHeightNonRecursive(root *Node) int`: Get the height of the BST (non-recursively).
 - `func max(a, b int) int`: Get the maximum of two integers.
+- `func getSize(root *Node) int`: Get the size of the BST.
+- `func getSizeNonRecursive(root *Node) int`: Get the size of the BST (non-recursively).
 
 ## Example
 

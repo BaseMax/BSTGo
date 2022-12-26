@@ -257,6 +257,76 @@ func max(a, b int) int {
 }
 
 /**
+ * @brief: Get the height of the binary tree. (non-recursively)
+ * @param root: The root of binary tree.
+ * @return: The height of the binary tree.
+ */
+func getHeightNonRecursive(root *Node) int {
+	if root == nil {
+		return 0
+	}
+
+	q := []*Node{root}
+	height := 0
+	for len(q) > 0 {
+		size := len(q)
+		for i := 0; i < size; i++ {
+			n := q[0]
+			q = q[1:]
+			if n.left != nil {
+				q = append(q, n.left)
+			}
+			if n.right != nil {
+				q = append(q, n.right)
+			}
+		}
+		height++
+	}
+
+	return height
+}
+
+/**
+ * @brief: Get the size of the binary tree.
+ * @param root: The root of binary tree.
+ * @return: The size of the binary tree.
+ */
+ func getSize(root *Node) int {
+	if root == nil {
+		return 0
+	}
+
+	return getSize(root.left) + getSize(root.right) + 1
+}
+	
+/**
+ * @brief: Get the size of the binary tree. (non-recursively)
+ * @param root: The root of binary tree.
+ * @return: The size of the binary tree.
+ */
+func getSizeNonRecursive(root *Node) int {
+	if root == nil {
+		return 0
+	}
+
+	q := []*Node{root}
+	size := 0
+	for len(q) > 0 {
+		n := q[0]
+		q = q[1:]
+		size++
+		if n.left != nil {
+			q = append(q, n.left)
+		}
+		if n.right != nil {
+			q = append(q, n.right)
+		}
+	}
+
+	return size
+}
+
+/**
  * @brief: Delete a node with the given value.
  * @param root: The root of binary tree.
  * @param value: The value of the node to be deleted.
@@ -297,6 +367,9 @@ func deleteNode(root *Node, value int) *Node {
  * @param value: The value of the node to be deleted.
  * @return: The root of the binary tree.
  */
+// Worst case: O(n)
+// Average case: O(logn)
+// Best case: O(1)
 func deleteNodeNonRecursively(root *Node, value int) *Node {
 	if root == nil {
 		return nil
