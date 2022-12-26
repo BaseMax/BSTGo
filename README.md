@@ -29,6 +29,9 @@ type BST struct {
 - `func findFirstParent(root *Node) *Node`: Find the first parent of the given node which is the left child of its parent.
 - `func findNext(root *Node, value int) *Node`: Find next of the given node.
 - `func findNextAny(root *Node, node *Node) *Node`: Find next of the given node (for any Binary Tree).
+- `func deleteNode(root *Node, value int) *Node`: Delete a node with the given value.
+- `func deleteNodeNonRecursively(root *Node, value int) *Node`: Delete a node with the given value (non-recursive).
+
 - `func getHeight(root *Node) int`: Get the height of the BST.
 - `func max(a, b int) int`: Get the maximum of two integers.
 
