@@ -39,6 +39,12 @@ if n != nil {
     println(n.value)
 }
 
+// findNonRecursively
+n = findNonRecursively(bst.root, 5)
+if n != nil {
+    println(n.value)
+}
+
 // Get the height
 println(getHeight(bst.root))
 ```
