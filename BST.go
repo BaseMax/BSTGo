@@ -36,7 +36,8 @@ func insert(root *Node, value int) *Node {
  * @param value: The value of the node to be found.
  * @return: The node with the given value.
  */
-// O(logn) (worst case O(n))
+// B(logn)
+// worst case O(n-1)
 func find(root *Node, value int) *Node {
 	if root == nil {
 		return nil
@@ -54,47 +55,90 @@ func find(root *Node, value int) *Node {
 }
 
 /**
+ * @brief: Find the left most child of the given node.
+ * @param root: The root of binary tree.
+ * @return: The left most child of the given node.
+ */
+func findLeftMost(root *Node) *Node {
+	if root == nil {
+		return nil
+	}
+
+	for root.left != nil {
+		root = root.left
+	}
+
+	return root
+}
+
+/**
+ * @brief: Find the parent of the given node.
+ * @param root: The root of binary tree.
+ * @param value: The value of the given node.
+ * @return: The parent of the given node.
+ */
+func findParent(root *Node, value int) *Node {
+	if root == nil {
+		return nil
+	}
+
+	if root.left != nil && root.left.value == value {
+		return root
+	}
+
+	if root.right != nil && root.right.value == value {
+		return root
+	}
+
+	if value < root.value {
+		return findParent(root.left, value)
+	} else {
+		return findParent(root.right, value)
+	}
+}
+
+/**
+ * @brief: Find the first parent of the given node which is the left child of its parent.
+ * @param root: The root of binary tree.
+ * @return: The first parent of the given node which is the left child of its parent.
+ */
+func findFirstParent(root *Node) *Node {
+	if root == nil {
+		return nil
+	}
+
+	p := findParent(root, root.value)
+	if p == nil {
+		return nil
+	}
+
+	if p.left != nil && p.left.value == root.value {
+		return p
+	}
+
+	return findFirstParent(p)
+}
+
+/**
  * @berif: Find next of the given node.
  * @param root: The root of binary tree.
  * @return: The next node of the given node.
  */
 func findNext(root *Node, value int) *Node {
-	if root == nil {
+	n := find(root, value)
+
+	if n == nil {
 		return nil
 	}
 
-	node := find(root, value)
-	if node == nil {
-		return nil
+	// if n has right child, find the left most child of n.right
+	if n.right != nil {
+		return findLeftMost(n.right)
 	}
 
-	// if the node has right child, find the leftmost node of the right child
-	if node.right != nil {
-		q := []*Node{node.right}
-		for len(q) > 0 {
-			n := q[0]
-			q = q[1:]
-			if n.left == nil {
-				return n
-			}
-			q = append(q, n.left)
-		}
-	}
-
-	// if the node has no right child, find the first node that is the left child of its parent
-	p := root
-	n := node
-	for p != nil {
-		if p.left == n {
-			return p
-		}
-		if n.value < p.value {
-			p = p.left
-		} else {
-			p = p.right
-		}
-	}
-	return nil
+	// if n has no right child, find the first parent of n which is the left child of its parent
+	return findFirstParent(n)
+}
 
 /**
  * @berif: Find next of the given node (for any Binary Tree)
@@ -121,24 +165,4 @@ func findNextAny(root *Node, node *Node) *Node {
 		q = append(q, n.left)
 	}
 	return nil
-}
-
-/**
- * @berif: Insert a new node into the BST. (Sorted BST)
- * @param root: The root of binary tree.
- * @param value: The value of the new node.
- * @return: The root of the new binary tree.
- */
-func insertSorted(root *Node, value int) *Node {
-	if root == nil {
-		return &Node{value: value}
-	}
-
-	if value < root.value {
-		root.left = insertSorted(root.left, value)
-	} else {
-		root.right = insertSorted(root.right, value)
-	}
-
-	return root
 }
