@@ -1,9 +1,36 @@
 # BST Go
 
-This is a Go implementation of the BST data structure with a few of the most common operations.
+This is a Go implementation of the BST data structure with a few of the most common operations. The algorithms code should be easy to understand.
 
 ## Structure
 
+**Types:**
+
+```go
+type Node struct {
+	value int
+	left  *Node
+	right *Node
+}
+
+type BST struct {
+	root *Node
+}
+```
+
+**Functions:**
+
+- `func insert(root *Node, value int) *Node`: Insert a new node into the BST.
+- `func insertNonRecursively(root *Node, value int) *Node`: Insert a new node into the BST (non-recursively).
+- `func find(root *Node, value int) *Node`: Find the node with the given value.
+- `func findNonRecursively(root *Node, value int) *Node`: Find the node with the given value (non-recursively).
+- `func findLeftMost(root *Node) *Node`: Find the left most child of the given node.
+- `func findParent(root *Node, value int) *Node: Find the parent of the given node.
+- `func findFirstParent(root *Node) *Node`: Find the first parent of the given node which is the left child of its parent.
+- `func findNext(root *Node, value int) *Node`: Find next of the given node.
+- `func findNextAny(root *Node, node *Node) *Node`: Find next of the given node (for any Binary Tree).
+- `func getHeight(root *Node) int`: Get the height of the BST.
+- `func max(a, b int) int`: Get the maximum of two integers.
 
 ## Example
 
