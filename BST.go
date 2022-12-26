@@ -318,6 +318,19 @@ func deleteNodeNonRecursively(root *Node, value int) *Node {
 	if n == nil {
 		return root
 	}
+	// found and there is no left and right childs
+	else if n.left == nil && n.right == nil {
+		if p == nil {
+			return nil
+		}
+
+		if p.left == n {
+			p.left = nil
+		} else {
+			p.right = nil
+		}
+		return root
+	}
 	// found and there is no left child
 	else if n.left == nil {
 		if p == nil {
