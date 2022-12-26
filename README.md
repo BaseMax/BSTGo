@@ -1,6 +1,6 @@
 # BST Go
 
-This is a Go implementation of the BST data structure with a few of the most common operations. The algorithms code should be easy to understand.
+This is a Go implementation of the BST data structure with a few of the most common operations. The algorithms code should be easy to understand. BST Tree is a binary tree in which the value of each node is greater than or equal to any value stored in the left sub-tree, and less than or equal to any value stored in the right sub-tree.
 
 ## Structure
 
