@@ -256,6 +256,114 @@ func max(a, b int) int {
 	return b
 }
 
+/**
+ * @brief: Delete a node with the given value.
+ * @param root: The root of binary tree.
+ * @param value: The value of the node to be deleted.
+ * @return: The root of the binary tree.
+ */
+func deleteNode(root *Node, value int) *Node {
+	if root == nil {
+		return nil
+	}
+
+	if value < root.value {
+		root.left = deleteNode(root.left, value)
+	}
+	else if value > root.value {
+		root.right = deleteNode(root.right, value)
+	}
+	// root.value is the value to be deleted
+	else {
+		if root.left == nil {
+			return root.right
+		}
+		if root.right == nil {
+			return root.left
+		}
+
+		// find the left most child of root.right
+		n := findLeftMost(root.right)
+		root.value = n.value
+		root.right = deleteNode(root.right, n.value)
+	}
+
+	return root
+}
+
+/**
+ * @brief: Delete a node with the given value (non-recursive).
+ * @param root: The root of binary tree.
+ * @param value: The value of the node to be deleted.
+ * @return: The root of the binary tree.
+ */
+func deleteNodeNonRecursively(root *Node, value int) *Node {
+	if root == nil {
+		return nil
+	}
+
+	n := root
+	var p *Node
+
+	for n != nil && n.value != value {
+		p = n
+		if value < n.value {
+			n = n.left
+		} else {
+			n = n.right
+		}
+	}
+
+	// not found
+	if n == nil {
+		return root
+	}
+	// found and there is no left child
+	else if n.left == nil {
+		if p == nil {
+			return n.right
+		}
+
+		if p.left == n {
+			p.left = n.right
+		} else {
+			p.right = n.right
+		}
+		return root
+	}
+	// found and there is no right child
+	else if n.right == nil {
+		if p == nil {
+			return n.left
+		}
+
+		if p.left == n {
+			p.left = n.left
+		} else {
+			p.right = n.left
+		}
+		return root
+	}
+
+	// found and there are both left and right child
+	// find the left most child of n.right
+	m := n.right
+	var mp *Node
+	for m.left != nil {
+		mp = m
+		m = m.left
+	}
+
+	n.value = m.value
+	if mp == nil {
+		n.right = m.right
+	} else {
+		mp.left = m.right
+	}
+
+	return root
+}
+
 func main() {
 	// Create a BST
 	bst := BST{}
