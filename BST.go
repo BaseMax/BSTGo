@@ -166,3 +166,51 @@ func findNextAny(root *Node, node *Node) *Node {
 	}
 	return nil
 }
+
+/**
+ * @brief: Get the height of the binary tree.
+ * @param root: The root of binary tree.
+ * @return: The height of the binary tree.
+ */
+func getHeight(root *Node) int {
+	if root == nil {
+		return 0
+	}
+
+	return max(getHeight(root.left), getHeight(root.right)) + 1
+}
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+func main() {
+	// Create a BST
+	bst := BST{}
+
+	// Insert nodes into the BST
+	bst.root = insert(bst.root, 5)
+	bst.root = insert(bst.root, 3)
+	bst.root = insert(bst.root, 7)
+	bst.root = insert(bst.root, 2)
+	bst.root = insert(bst.root, 4)
+	bst.root = insert(bst.root, 6)
+	bst.root = insert(bst.root, 8)
+
+	// Find the node with the given value
+	n := findNext(bst.root, 5)
+	if n != nil {
+		println(n.value)
+	}
+
+	// Find a node
+	n = find(bst.root, 5)
+	if n != nil {
+		println(n.value)
+	}
+
+	// Get the height
+	println(getHeight(bst.root))
+}
