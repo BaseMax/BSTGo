@@ -16,6 +16,8 @@ type BST struct {
  * @param value: The value of the new node.
  * @return: The root of the new binary tree.
  */
+// B(logn)
+// Worst case O(n-1)
 func insert(root *Node, value int) *Node {
 	if root == nil {
 		return &Node{value: value}
@@ -36,6 +38,8 @@ func insert(root *Node, value int) *Node {
  * @param value: The value of the new node.
  * @return: The root of the new binary tree.
  */
+// B(logn)
+// worst case O(n-1)
 func insertNonRecursively(root *Node, value int) *Node {
 	if root == nil {
 		return &Node{value: value}
@@ -229,6 +233,13 @@ func main() {
 	bst.root = insert(bst.root, 4)
 	bst.root = insert(bst.root, 6)
 	bst.root = insert(bst.root, 8)
+
+	// insertNonRecursively
+	bst.root = insertNonRecursively(bst.root, 15)
+	bst.root = insertNonRecursively(bst.root, 13)
+	bst.root = insertNonRecursively(bst.root, 17)
+	bst.root = insertNonRecursively(bst.root, 12)
+	bst.root = insertNonRecursively(bst.root, 14)
 
 	// Find the node with the given value
 	n := findNext(bst.root, 5)
